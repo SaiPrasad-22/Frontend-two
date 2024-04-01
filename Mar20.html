@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mar 20 - DOM 1</title>
+    <style>
+        input {
+            display: block;
+            margin: 10px;
+        }
+        button {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+            Document.querySelector()
+            .addEventListner('','')
+            function(Callevent){}
+            innerHTML
+            innerText
+            eventDetails.
+            eventDetails.preventDefault();
+            JSON - Used to communicate one programming language to another (ex: python to Js)
+            let obj = JSON.stringify(obj) - Used to translate JS to another.
+            let obj = json.parse(obj) - used to translate to Js.
+         -->
+
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <form>
+            <input type="text" placeholder="Enter Name" id="name">
+            <input type="email" placeholder="Enter Email" id="email">
+            <input type="password" placeholder="Enter password" id="password">
+            <input type="password" placeholder="Confirm password" id="confPass">
+            <button type="submit">Submit</button>
+        </form>
+    </fieldset>
+    <div class="output"></div>
+    <img src="../" alt="">
+
+  
+
+
+
+
+
+
+
+    <script>
+        let name_box = document.querySelector('#name');
+        let email_box = document.querySelector('#email');
+        let password_box = document.querySelector('#password');
+        let confPass_box = document.querySelector('#confPass');
+        let btn = document.querySelector('button');
+        let form = document.querySelector('form');
+
+        // btn.addEventListener('click', sumbitForm);
+        // let output = document.querySelector('.output')
+
+        form.addEventListener('submit', sumbitForm);
+
+        function sumbitForm(eventDetails) {
+            eventDetails.preventDefault();
+            let name = name_box.value;
+            let email = email_box.value;
+            let password = password_box.value;
+            let confPass = confPass_box.value;
+
+            // console.log(name,email,password,confPass);
+            // let div = document.createElement('div')
+            // div.innerHTML = ` Name: ${name}, Email: ${email}, Password: ${password}, Confirm Password: ${confPass}`;
+            // document.body.append(div);
+
+            let userData = {
+                name : name,
+                email : email,
+                password : password,
+                confPass : confPass
+            }
+
+            let userDataJson = JSON.stringify(userData);
+
+            localStorage.setItem("user", userDataJson);
+
+            // emailArray.push(email)
+            // let emailarrJson = JSON.stringify(emailArray)
+            // localStorage.setItem("email", emailarrJson);
+
+
+        }
+
+    </script>
+</body>
+
+</html>
