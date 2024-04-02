@@ -12,7 +12,7 @@ h1 {
 }
 .column{
     width: 30%;
-    min-height: 200px;
+    min-height: 400px;
     border: 1px solid lightgrey;
     border-radius: 5px;
     padding: 10px;
@@ -25,9 +25,18 @@ h3{
 
 button{
     padding: 8px 16px;
-    border: 1px lightgray solid;
+    border: 1px solid lightgray ;
     color: white;
     background-color: black;
     border-radius: 10px;
     font-weight: bold;
+}
+
+.card{
+    border: 1px solid lightgrey;
+    background-color: palegoldenrod;
+    border-radius: 7px;
+    padding: 3px 6px;
+    cursor: pointer;
+    margin-top: 5px;
 }
