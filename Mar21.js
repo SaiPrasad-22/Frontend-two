@@ -3,9 +3,12 @@ let todo = document.querySelector('#todo')
 
 addcard.addEventListener('click', addTask);
 
+// Drag Function Start
+let count = 1000000
 function addTask() {
     console.log("Clicked")
     let card = document.createElement('div');
+    card.id= `card-${count++}`
     card.className = "card";
     card.innerHTML = "Add Task"
     card.setAttribute("contenteditable", true);
@@ -14,31 +17,44 @@ function addTask() {
     card.focus();
 
 
-    card.addEventListener("dragstart", (eventDetails)=>{
-        let dragCard = eventDetails.target;
-        dragCard.style.opacity = 0.5;
+    card.addEventListener("dragstart", (eventDetails) => {
+        let draggedCard = eventDetails.target;
+        eventDetails.dataTransfer.setData("text/plain", draggedCard.id)
+        draggedCard.style.opacity = 0.5;
     })
 
-    card.addEventListener("dragend", (eventDetails)=>{
-        let dragCard = eventDetails.target;
-        dragCard.style.opacity = 1;
-    })
-
-   
-    card.addEventListener("dragover", (eventDetails)=>{
-        eventDetails.preventDefault();
-    })
-    card.addEventListener("dragenter", (eventDetails)=>{
-        eventDetails.preventDefault();
-    })
-    card.addEventListener("drop", (eventDetails)=>{
-        eventDetails.preventDefault();
+    card.addEventListener("dragend", (eventDetails) => {
+        let draggedCard = eventDetails.target;
+        draggedCard.style.opacity = 1;
     })
 
 
+    // Drop, Dragover, Dragenter by Loop
+
+    let dragEvents = ["dragover", "dragenter", "drop"];
+
+    dragEvents.forEach((dropEvent) => {
+        let columns = document.querySelectorAll('.column');
+        for (let c of columns) {
+            c.addEventListener(dropEvent, (eventDetails) => {
+                eventDetails.preventDefault();
+
+                if (dropEvent == "drop") {
+                    let cardId = eventDetails.dataTransfer.getData("text/plain")
+                    let draggedCard = document.querySelector(`#${cardId}`)
+                    let currentColumn = eventDetails.target;
+                    currentColumn.append(draggedCard);
+
+                }
+            })
+
+        }
+    }) 
+
+}
 
 
-
+    // // SELECTOR -->
 
     // card.addEventListener("blur", blurFunction);
 
@@ -58,7 +74,6 @@ function addTask() {
     //     }
     // }
 
-    // // SELECTOR -->
 
     // let selector = document.createElement("select");
     // selector.innerHTML =
@@ -82,12 +97,3 @@ function addTask() {
     //     console.log(selectedContainer);
     //     selectedContainer.append(card);
     // })
-
-
-
-
-}
-
-
-
-
